@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CollabVM Resources - Classic Edition</title>
+  <title>stupid collabvm pack</title>
 </head>
 <body style="margin: 0; padding: 20px; font-family: 'Times New Roman', Times, serif; background-color: #c0c0c0; color: #000;">
 
   <div style="max-width: 850px; margin: 0 auto; background-color: white; padding: 20px; border: 3px double #333; box-shadow: 5px 5px 0px #888;">
 
     <marquee style="background: #000080; color: #ffffff; padding: 5px; font-weight: bold; margin-bottom: 20px;">
-      *** WELCOME TO THE COLLABVM RESOURCE HUB! - UPDATED FOR 2026 - ENJOY THE STUPID ASS SHIT THINGS ***
+      *** ATENÇÃO: NEW TOOLS ADDED! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
     </marquee>
 
     <div style="text-align: center; border-bottom: 4px solid #000; padding-bottom: 20px; margin-bottom: 25px;">
       <h1 style="margin: 0 0 5px 0; font-size: 3em; letter-spacing: -1px;">CollabVM Resources</h1>
-      <p style="margin: 0; font-size: 1.3em; font-style: italic; color: #444;">Tools, Scripts and Stupid Ass Shit for CollabVM Enthusiasts</p>
+      <p style="margin: 0; font-size: 1.2em; font-style: italic; color: #444;">"Stupid Ass Shit Things for CollabVM"</p>
     </div>
 
     <div style="margin-bottom: 30px; text-align: center; background: #eee; padding: 10px; border: 1px inset #fff;">
@@ -26,123 +26,121 @@
     </div>
 
     <div id="downloads" style="margin-bottom: 40px;">
-      <h2 style="background: #000080; color: white; padding: 5px 10px; font-size: 1.5em;">Software Downloads</h2>
-      
-      <p>Latest tools available for download:</p>
+      <h2 style="background: #000080; color: white; padding: 5px 10px; font-size: 1.5em;">Software Repository</h2>
       
       <table style="width: 100%; border-collapse: collapse; border: 2px solid #000; margin-top: 10px;">
         <thead>
           <tr style="background-color: #d3d3d3;">
             <th style="border: 1px solid #000; padding: 10px; text-align: left;">File Name</th>
             <th style="border: 1px solid #000; padding: 10px;">Size</th>
-            <th style="border: 1px solid #000; padding: 10px;">Version</th>
             <th style="border: 1px solid #000; padding: 10px;">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="border: 1px solid #000; padding: 10px; font-weight: bold;">Gate (VPN Tool)</td>
+            <td style="border: 1px solid #000; padding: 10px;">
+              <strong>Gate</strong><br>
+              <small>VPN Gate tool for CollabVM</small>
+            </td>
             <td style="border: 1px solid #000; padding: 10px; text-align: center;">2.5 MB</td>
-            <td style="border: 1px solid #000; padding: 10px; text-align: center;">1.0</td>
             <td style="border: 1px solid #000; padding: 10px; text-align: center;">
-              <button onclick="downloadGate()" style="cursor: pointer; font-weight: bold;">GET FILE</button>
+              <button onclick="downloadGate()" style="cursor: pointer; font-weight: bold; padding: 5px 10px; background: #ddd; border: 2px outset #fff;">DOWNLOAD .ZIP</button>
             </td>
           </tr>
         </tbody>
       </table>
       
-      <p style="font-size: 0.9em; color: #555;">
-        Total Downloads for Gate: <span id="gate-downloads" style="font-weight: bold;">0</span>
+      <p style="font-size: 0.9em; color: #555; margin-top: 10px;">
+        Total Downloads for Gate: <span id="gate-downloads" style="font-weight: bold; color: #d00;">0</span>
       </p>
     </div>
 
     <div id="projects" style="margin-bottom: 40px; padding: 15px; border: 2px dashed #000;">
-      <h2 style="margin-top: 0;">More Fun Projects</h2>
-      <p style="line-height: 1.6;">
-        Check out these other useless (but fun) scripts found on the deep corners of my GitHub.
-      </p>
+      <h2 style="margin-top: 0;">More Projects</h2>
       <ul style="list-style-type: square; line-height: 1.8;">
-        <li><a href="https://github.com/IamNothingUh" target="_blank" rel="noopener">CollabVM Auto-Chatter (Coming Soon)</a></li>
-        <li><a href="https://github.com/IamNothingUh" target="_blank" rel="noopener">VirtualBox Headless Wrapper</a></li>
-        <li><a href="https://github.com/IamNothingUh" target="_blank" rel="noopener">Old School Batch Scripts</a></li>
+        <li><a href="https://google.com" target="_blank" rel="noopener">Coming Soon (Secret Project)</a></li>
+        <li><a href="https://google.com" target="_blank" rel="noopener">Legacy VM Scripts</a></li>
       </ul>
     </div>
 
     <div id="comments" style="margin-bottom: 40px;">
-      <h2 style="background: #800000; color: white; padding: 5px 10px; font-size: 1.5em;">Guestbook / Feedback</h2>
+      <h2 style="background: #800000; color: white; padding: 5px 10px; font-size: 1.5em;">Public Guestbook</h2>
       
-      <div style="background-color: #f0f0f0; border: 1px solid #888; padding: 15px; margin-bottom: 20px;">
-        <h3 style="margin-top: 0;">Sign the Guestbook</h3>
+      <div style="background-color: #f9f9f9; border: 1px solid #888; padding: 15px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0; font-size: 1.1em;">Sign the Book:</h3>
         <div style="margin-bottom: 10px;">
-          <label style="display: block; font-weight: bold;">Name:</label>
-          <input type="text" id="commentName" style="width: 200px; border: 1px solid #333;">
+          <input type="text" id="commentName" placeholder="Your Alias" style="width: 200px; padding: 5px;">
+          <input type="email" id="commentEmail" placeholder="Email (Private)" style="width: 200px; padding: 5px;">
         </div>
         <div style="margin-bottom: 10px;">
-          <label style="display: block; font-weight: bold;">Email (will not be shown):</label>
-          <input type="email" id="commentEmail" style="width: 200px; border: 1px solid #333;">
+          <textarea id="commentText" placeholder="Write your message..." style="width: 100%; height: 60px; padding: 5px; resize: vertical;"></textarea>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; font-weight: bold;">Message:</label>
-          <textarea id="commentText" style="width: 100%; height: 60px; border: 1px solid #333; resize: vertical;"></textarea>
-        </div>
-        <button onclick="addComment()" style="padding: 5px 15px; font-weight: bold; background: #ddd; border: 2px outset #fff; cursor: pointer;">SUBMIT COMMENT</button>
+        <button onclick="addComment()" style="padding: 5px 20px; font-weight: bold; cursor: pointer;">POST MESSAGE</button>
       </div>
 
-      <h3 style="border-bottom: 1px solid #000;">Recent Entries (<span id="commentCount">0</span>)</h3>
+      <h3 style="border-bottom: 1px solid #000;">Entries (<span id="commentCount">0</span>)</h3>
       <div id="commentsContainer"></div>
-      <p id="noComments" style="font-style: italic; color: #666;">No one has signed the guestbook yet...</p>
+      <p id="noComments" style="text-align: center; color: #999;">The guestbook is empty. Say hello!</p>
     </div>
 
-    <div id="about" style="text-align: center; background: #ffffe0; padding: 20px; border: 1px solid #e6db55;">
-      <h2>About This Site</h2>
-      <p>Dedicated to the preservation of weird CollabVM tools. Built with blood, sweat, and outdated HTML practices.</p>
-      <a href="https://github.com/IamNothingUh" target="_blank" style="display: inline-block; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; font-weight: bold;">VIEW MY GITHUB</a>
+    <div id="about" style="background: #ffffe0; padding: 20px; border: 1px solid #e6db55; text-align: center;">
+      <h2>About Me</h2>
+      <p>Just a guy sharing CollabVM stuff. No warranties, no guarantees, just code.</p>
+      <a href="https://github.com/IamNothingUh" target="_blank" rel="noopener" style="background: #000; color: #fff; padding: 10px; text-decoration: none; font-weight: bold; border-radius: 3px;">VISIT MY GITHUB</a>
     </div>
 
-    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #ccc; padding-top: 15px; font-size: 0.85em;">
-      <p>
-        <strong>Visitor Count:</strong> <span style="background: #000; color: #0f0; padding: 2px 5px; font-family: monospace; font-size: 1.2em;">000432</span>
-      </p>
-      <p>Last Updated: January 2026 | Best viewed in 800x600 resolution</p>
-      <p>Stats: <span id="totalComments">0</span> Comments | <span id="totalDownloads">0</span> Downloads</p>
+    <div style="text-align: center; margin-top: 40px; border-top: 2px solid #000; padding-top: 15px; font-size: 0.85em;">
+      <p><strong>Visitor No:</strong> <span style="background: #000; color: #0f0; padding: 2px 6px; font-family: monospace; font-size: 1.2em;">000667</span></p>
+      <p>Last Updated: 2026 | Stats: <span id="totalComments">0</span> Comments | <span id="totalDownloads">0</span> DLs</p>
     </div>
 
   </div>
 
   <script>
-    // Load downloads
+    // --- SEGURANÇA: Proteção contra XSS ---
+    function sanitize(str) {
+      const temp = document.createElement('div');
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
+
+    // --- DOWNLOADS ---
     function loadDownloads() {
       let downloads = localStorage.getItem('gateDownloads') || 0;
       document.getElementById('gate-downloads').textContent = downloads;
       document.getElementById('totalDownloads').textContent = downloads;
     }
 
-    // Download action
     function downloadGate() {
+      // Abre o link direto do seu GitHub
+      window.open('https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip', '_blank');
+      
       let downloads = parseInt(localStorage.getItem('gateDownloads') || '0');
       downloads++;
       localStorage.setItem('gateDownloads', downloads);
       loadDownloads();
-      alert('Your download of "Gate" has started! Check your downloads folder.');
     }
 
-    // Add comment
+    // --- GUESTBOOK ---
     function addComment() {
-      const name = document.getElementById('commentName').value.trim();
-      const email = document.getElementById('commentEmail').value.trim();
-      const text = document.getElementById('commentText').value.trim();
+      const rawName = document.getElementById('commentName').value.trim();
+      const rawEmail = document.getElementById('commentEmail').value.trim();
+      const rawText = document.getElementById('commentText').value.trim();
 
-      if (!name || !email || !text) {
-        alert('All fields are required to sign the guestbook!');
+      if (!rawName || !rawText) {
+        alert('Name and Message are required!');
         return;
       }
 
+      // Sanitiza as entradas para evitar XSS
+      const name = sanitize(rawName);
+      const text = sanitize(rawText);
+
       let comments = JSON.parse(localStorage.getItem('comments') || '[]');
       const newComment = {
-        id: Date.now(),
         name: name,
         text: text,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleString()
       };
 
       comments.push(newComment);
@@ -153,19 +151,20 @@
       document.getElementById('commentText').value = '';
 
       displayComments();
+      alert('Message added!');
     }
 
-    // Display comments
     function displayComments() {
       const comments = JSON.parse(localStorage.getItem('comments') || '[]');
       const container = document.getElementById('commentsContainer');
+      const countEl = document.getElementById('commentCount');
+      const totalEl = document.getElementById('totalComments');
       const noComments = document.getElementById('noComments');
-      
-      document.getElementById('commentCount').textContent = comments.length;
-      document.getElementById('totalComments').textContent = comments.length;
 
+      countEl.textContent = comments.length;
+      totalEl.textContent = comments.length;
       container.innerHTML = '';
-      
+
       if (comments.length === 0) {
         noComments.style.display = 'block';
         return;
@@ -173,11 +172,12 @@
 
       noComments.style.display = 'none';
 
-      // Most recent first
-      comments.slice().reverse().forEach(comment => {
+      // Mostra do mais novo para o mais antigo
+      comments.slice().reverse().forEach(c => {
         const div = document.createElement('div');
-        div.style.cssText = 'border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fafafa;';
-        div.innerHTML = `<strong>${comment.name}</strong> <small style="color: #666;">on ${comment.date}</small><br><p style="margin: 5px 0 0 0;">${comment.text}</p>`;
+        div.style.cssText = 'border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fcfcfc;';
+        div.innerHTML = `<div style="color: #000080; font-weight: bold;">${c.name} <small style="color: #666; font-weight: normal;"> - ${c.date}</small></div>
+                         <div style="margin-top: 5px; line-height: 1.4;">${c.text}</div>`;
         container.appendChild(div);
       });
     }
@@ -189,4 +189,3 @@
   </script>
 </body>
 </html>
-
