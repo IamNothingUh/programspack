@@ -1,104 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <title>Guestbook Seguro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>stupid collabvm pack</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f9; padding: 20px; max-width: 600px; margin: 0 auto; }
+    h2 { color: #333; text-align: center; }
+    form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    button { background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; transition: background 0.3s; }
+    button:hover { background-color: #218838; }
+    button:disabled { background-color: #ccc; cursor: not-allowed; }
+    .message-card { background: white; border-left: 5px solid #28a745; padding: 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .meta { color: #888; font-size: 0.85em; display: flex; justify-content: space-between; }
+    #charCount { font-size: 12px; color: #666; text-align: right; margin-top: -5px; margin-bottom: 10px; display: block; }
+    .error { color: red; font-size: 14px; text-align: center; margin-top: 10px; font-weight: bold; }
+    .success { color: green; font-size: 14px; text-align: center; margin-top: 10px; font-weight: bold; }
+  </style>
 </head>
 
-<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background:#c0c0c0;color:#000;">
+<body>
 
-<div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
+<h2>📖 Guestbook Público</h2>
 
-  <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-    *** ATENÇÃO: NEW TOOLS ADDED! - GUESTBOOK ONLINE - WELCOME TO THE HUB ***
-  </marquee>
+<form id="guestbookForm">
+  <input type="text" id="name" placeholder="Seu Nome (Máx 30 letras)" maxlength="30" required>
+  
+  <textarea id="message" rows="4" placeholder="Deixe sua mensagem..." maxlength="280" required></textarea>
+  <span id="charCount">0 / 280</span>
 
-  <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
-    <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
-    <p style="margin:0;font-style:italic;color:#444;">"Stupid Ass Shit Things for CollabVM"</p>
-  </div>
+  <div class="g-recaptcha" data-sitekey="6Lf6zkgsAAAAAPaMrMGI1E7UT3FgFB7oo5vn1yax"></div>
+  <br>
 
-  <div style="text-align:center;background:#eee;padding:10px;border:1px inset #fff;margin-bottom:30px;">
-    <a href="#downloads" style="margin:0 15px;font-weight:bold;">[DOWNLOADS]</a>
-    <a href="#comments" style="margin:0 15px;font-weight:bold;">[GUESTBOOK]</a>
-    <a href="#about" style="margin:0 15px;font-weight:bold;">[ABOUT]</a>
-  </div>
+  <button type="submit" id="btnPost">Publicar Mensagem</button>
+  <p id="statusMsg"></p>
+</form>
 
-  <!-- DOWNLOADS -->
-  <div id="downloads" style="margin-bottom:40px;">
-    <h2 style="background:#000080;color:#fff;padding:5px 10px;">Software Repository</h2>
+<hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
 
-    <table style="width:100%;border-collapse:collapse;border:2px solid #000;margin-top:10px;">
-      <tr style="background:#d3d3d3;">
-        <th style="border:1px solid #000;padding:10px;text-align:left;">File</th>
-        <th style="border:1px solid #000;padding:10px;">Size</th>
-        <th style="border:1px solid #000;padding:10px;">Action</th>
-      </tr>
-      <tr>
-        <td style="border:1px solid #000;padding:10px;">
-          <strong>Gate</strong><br>
-          <small>VPN Gate tool</small>
-        </td>
-        <td style="border:1px solid #000;padding:10px;text-align:center;">2.5 MB</td>
-        <td style="border:1px solid #000;padding:10px;text-align:center;">
-          <a href="https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip"
-             target="_blank"
-             style="padding:5px 10px;border:2px outset #fff;background:#ddd;font-weight:bold;text-decoration:none;">
-            DOWNLOAD
-          </a>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- GUESTBOOK -->
-  <div id="comments" style="margin-bottom:40px;">
-    <h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
-
-    <div style="background:#f9f9f9;border:1px solid #888;padding:15px;">
-      <h3>Sign the Book</h3>
-
-      <form action="https://formspree.io/f/xzddbakn" method="POST">
-        <div style="margin-bottom:10px;">
-          <input type="text" name="name" placeholder="Your Alias" required style="width:200px;padding:5px;">
-          <input type="email" name="email" placeholder="Email (optional)" style="width:200px;padding:5px;">
-        </div>
-
-        <div style="margin-bottom:10px;">
-          <textarea name="message" placeholder="Write your message..." required
-            style="width:100%;height:70px;padding:5px;"></textarea>
-        </div>
-
-        <!-- extras do Formspree -->
-        <input type="hidden" name="_subject" value="New Guestbook Message">
-        <input type="hidden" name="_template" value="table">
-
-        <button type="submit" style="padding:5px 20px;font-weight:bold;cursor:pointer;">
-          POST MESSAGE
-        </button>
-      </form>
-
-      <p style="font-size:0.85em;color:#666;margin-top:10px;">
-        Messages are sent directly to the site owner.
-      </p>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;">
-    <h2>About</h2>
-    <p>Just a guy sharing CollabVM stuff.</p>
-    <a href="https://github.com/IamNothingUh" target="_blank"
-       style="background:#000;color:#fff;padding:10px;text-decoration:none;font-weight:bold;">
-      VISIT MY GITHUB
-    </a>
-  </div>
-
-  <div style="text-align:center;margin-top:30px;border-top:2px solid #000;padding-top:10px;font-size:0.8em;">
-    <p>© 2026 — Guestbook powered by Formspree</p>
-  </div>
-
+<div id="messages">
+  <p style="text-align:center; color:gray">Carregando mensagens...</p>
 </div>
+
+<script>
+/* ================= CONFIGURAÇÕES (PREENCHA AQUI!) ================= */
+// Copie da aba API no Supabase (Project Settings > API)
+const SUPABASE_URL = "SUA_PROJECT_URL_AQUI"; 
+const SUPABASE_KEY = "SUA_PUBLISHABLE_API_KEY_AQUI"; 
+
+// Configuração de Email
+const EMAILS_ENABLED = false; // Mude para true se quiser enviar email
+const FORMSPREE_URL = "https://formspree.io/f/xzddbakn";
+
+// Inicializa Supabase
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ================= LÓGICA DO SISTEMA ================= */
+
+// 1. Contador de Caracteres
+const msgInput = document.getElementById("message");
+const charCount = document.getElementById("charCount");
+msgInput.addEventListener("input", () => {
+  charCount.textContent = `${msgInput.value.length} / 280`;
+  if(msgInput.value.length >= 280) charCount.style.color = "red";
+  else charCount.style.color = "#666";
+});
+
+// 2. Renderizar Mensagens
+async function renderMessages() {
+  const box = document.getElementById("messages");
+  
+  // Busca as últimas 20 mensagens
+  const { data: msgs, error } = await supabase
+    .from('database')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(20);
+
+  if (error) {
+    box.innerHTML = `<p style="color:red; text-align:center">Erro ao conectar no banco.<br>Verifique se colocou a URL e a KEY corretas no código.</p>`;
+    console.error(error);
+    return;
+  }
+
+  box.innerHTML = "";
+  if(!msgs || msgs.length === 0) {
+    box.innerHTML = "<p style='text-align:center'>Nenhuma mensagem ainda. Seja o primeiro!</p>";
+    return;
+  }
+
+  msgs.forEach(m => {
+    const div = document.createElement("div");
+    div.className = "message-card";
+    // Proteção XSS (converte código HTML em texto simples)
+    const safeName = m.name ? m.name.replace(/</g, "&lt;") : 'Anônimo';
+    const safeText = m.text ? m.text.replace(/</g, "&lt;") : '';
+    
+    div.innerHTML = `
+      <div class="meta">
+        <strong>${safeName}</strong>
+        <span>${new Date(m.created_at).toLocaleDateString()} ${new Date(m.created_at).toLocaleTimeString()}</span>
+      </div>
+      <div style="margin-top:8px;">${safeText}</div>
+    `;
+    box.appendChild(div);
+  });
+}
+
+// 3. Enviar Formulário
+document.getElementById("guestbookForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const btn = document.getElementById("btnPost");
+  const status = document.getElementById("statusMsg");
+  const name = document.getElementById("name").value.trim();
+  const text = document.getElementById("message").value.trim();
+
+  // A) VERIFICAÇÃO DO RECAPTCHA
+  const captchaResponse = grecaptcha.getResponse();
+  if (captchaResponse.length === 0) {
+    status.className = "error";
+    status.textContent = "🤖 Ops! Marque a caixa 'Não sou um robô'.";
+    return;
+  }
+
+  // B) VERIFICAÇÃO DE COOLDOWN (60 segundos)
+  const lastPostTime = localStorage.getItem("lastPostTime");
+  const now = Date.now();
+  if (lastPostTime && (now - lastPostTime) < 60000) { 
+    status.className = "error";
+    status.textContent = "⏳ Calma aí! Espere 1 minuto antes de postar de novo.";
+    return;
+  }
+
+  // Estado de Carregamento
+  btn.disabled = true;
+  btn.textContent = "Enviando...";
+  status.textContent = "";
+
+  // C) SALVAR NO SUPABASE
+  const { error } = await supabase
+    .from('database')
+    .insert([{ name: name, text: text }]);
+
+  if (error) {
+    status.className = "error";
+    status.textContent = "Erro no banco: " + error.message;
+    btn.disabled = false;
+    btn.textContent = "Tentar Novamente";
+    return;
+  }
+
+  // D) ENVIAR EMAIL (SE ATIVADO)
+  if (EMAILS_ENABLED) {
+    fetch(FORMSPREE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, text })
+    }).catch(err => console.error("Erro email", err));
+  }
+
+  // Sucesso!
+  localStorage.setItem("lastPostTime", Date.now()); 
+  status.className = "success";
+  status.textContent = "✅ Mensagem enviada com sucesso!";
+  
+  // Limpar e Resetar
+  document.getElementById("guestbookForm").reset();
+  grecaptcha.reset(); 
+  charCount.textContent = "0 / 280";
+  
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = "Publicar Mensagem";
+    status.textContent = "";
+    renderMessages(); // Recarrega a lista
+  }, 2000);
+});
+
+// Carregar ao abrir
+renderMessages();
+</script>
+
 </body>
 </html>
