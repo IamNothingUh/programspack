@@ -1,105 +1,175 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Guestbook Supabase</title>
+  <title>stupid collabvm pack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body style="font-family:Arial;background:#ddd;padding:20px;">
+<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background:#c0c0c0;color:#000;">
 
-<h2>Guestbook Oficial</h2>
+<div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
 
-<form id="guestbookForm">
-  <input type="text" id="name" placeholder="Seu Nome" required><br><br>
-  <textarea id="message" placeholder="Sua Mensagem" required></textarea><br><br>
-  <button type="submit" id="btnPost">Postar</button>
-</form>
+  <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
+    *** GUESTBOOK PROTECTED — SUPABASE + CAPTCHA + LIMIT + ANTISPAM ***
+  </marquee>
 
-<p id="info" style="color:gray;font-size:12px;"></p>
-<hr>
-<div id="messages">Carregando mensagens...</div>
+  <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
+    <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
+    <p style="margin:0;font-style:italic;color:#444;">"Stupid Ass Shit Things for CollabVM"</p>
+  </div>
+
+  <div id="comments">
+    <h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
+    <div style="background:#f9f9f9;border:1px solid #888;padding:15px;">
+
+      <form id="guestbookForm">
+        <div style="margin-bottom:10px;">
+          <input type="text" id="formName" name="name" placeholder="Your Alias" required style="width:200px;padding:5px;">
+          <input type="email" id="formEmail" name="email" placeholder="Email (optional)" style="width:200px;padding:5px;">
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <textarea id="formMessage" name="message" placeholder="Write your message..." required
+            style="width:100%;height:70px;padding:5px;"></textarea>
+        </div>
+
+        <div style="display:none;">
+          <input type="text" id="honeypot" name="website">
+        </div>
+
+        <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div>
+
+        <br>
+        <button type="submit" id="btnPost" style="padding:5px 20px;font-weight:bold;cursor:pointer;">
+          POST MESSAGE
+        </button>
+      </form>
+
+      <p id="statusMsg" style="display:none;font-weight:bold;margin-top:10px;"></p>
+    </div>
+  </div>
+
+  <div id="messageList" style="margin-top:20px;">
+    <p style="text-align:center;">Loading messages from database...</p>
+  </div>
+
+  <div style="text-align:center;margin-top:30px;border-top:2px solid #000;padding-top:10px;font-size:0.8em;">
+    © 2026 — Guestbook powered by Supabase & Formspree
+  </div>
+</div>
 
 <script>
-/* ===== CONFIG SUPABASE ===== */
-const SUPABASE_URL = "COLE_AQUI_SUA_PROJECT_URL";
-const SUPABASE_KEY = "COLE_AQUI_SUA_PUBLISHABLE_API_KEY"; // Chave 'anon'
-
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-/* ===== CONFIG ENVIO ===== */
-const EMAILS_ENABLED = false; // ← SE FALSO, NÃO ENVIA PARA O FORMSPREE
+/* ===== CONFIGURAÇÃO SUPABASE ===== */
+const SUPABASE_URL = "COLE_SUA_URL_AQUI";
+const SUPABASE_KEY = "COLE_SUA_ANON_KEY_AQUI";
+const EMAILS_ENABLED = false; // Mude para true se quiser que envie para o Formspree também
 const FORMSPREE_URL = "https://formspree.io/f/xzddbakn";
 
-/* ===== BUSCAR MENSAGENS DO BANCO ===== */
-async function renderMessages() {
-  const box = document.getElementById("messages");
-  
-  // Busca da sua tabela chamada 'database'
-  const { data: msgs, error } = await supabase
-    .from('database')
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ===== FUNÇÕES DE CONTROLE ===== */
+function todayKey() {
+  const d = new Date();
+  return `guestbook_${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+
+// Carregar mensagens do Supabase
+async function loadMessages() {
+  const list = document.getElementById("messageList");
+  const { data, error } = await supabaseClient
+    .from('database') // Nome da sua tabela
     .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
-    box.innerHTML = "Erro ao carregar: " + error.message;
+    list.innerHTML = "<p>Error loading messages.</p>";
     return;
   }
 
-  box.innerHTML = "";
-  msgs.forEach(m => {
-    const div = document.createElement("div");
-    div.style.border = "1px solid #aaa";
-    div.style.padding = "8px";
-    div.style.marginBottom = "5px";
-    div.style.background = "#fff";
-    // Usando os campos 'name' e 'text' que você deve criar na tabela
-    div.innerHTML = `<b>${m.name || 'Anônimo'}</b> <small>${new Date(m.created_at).toLocaleString()}</small><br>${m.text || m.message || ''}`;
-    box.appendChild(div);
-  });
+  list.innerHTML = data.map(m => `
+    <div style="border:1px solid #888; background:#eee; padding:10px; margin-bottom:10px;">
+      <div style="display:flex; justify-content:space-between; font-size:0.8em; color:#444; border-bottom:1px solid #ccc; margin-bottom:5px;">
+        <b>${m.name.replace(/</g, "&lt;")}</b>
+        <span>${new Date(m.created_at).toLocaleString()}</span>
+      </div>
+      <div style="word-wrap:break-word;">${m.text.replace(/</g, "&lt;")}</div>
+    </div>
+  `).join('');
 }
 
-/* ===== FORMULÁRIO ===== */
+// Lógica de Envio
 document.getElementById("guestbookForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+  
+  const status = document.getElementById("statusMsg");
   const btn = document.getElementById("btnPost");
-  const name = document.getElementById("name").value.trim();
-  const text = document.getElementById("message").value.trim();
+  const name = document.getElementById("formName").value;
+  const text = document.getElementById("formMessage").value;
+  const email = document.getElementById("formEmail").value;
+  const isBot = document.getElementById("honeypot").value;
+
+  // 1. Honeypot check
+  if (isBot) return;
+
+  // 2. Limite diário (localStorage)
+  const key = todayKey();
+  let count = parseInt(localStorage.getItem(key) || "0");
+  if (count >= 3) {
+    status.style.display = "block";
+    status.style.color = "red";
+    status.textContent = "Daily limit reached (3 messages per day).";
+    return;
+  }
+
+  // 3. reCAPTCHA check
+  if (grecaptcha.getResponse().length === 0) {
+    alert("Please complete the reCAPTCHA.");
+    return;
+  }
 
   btn.disabled = true;
-  info.textContent = "Processando...";
+  status.style.display = "block";
+  status.style.color = "blue";
+  status.textContent = "Sending to database...";
 
-  // 1. SALVA NO SUPABASE (Sempre)
-  const { error } = await supabase
+  // 4. Salvar no Supabase
+  const { error } = await supabaseClient
     .from('database')
     .insert([{ name: name, text: text }]);
 
   if (error) {
-    alert("Erro ao salvar no banco: " + error.message);
+    status.style.color = "red";
+    status.textContent = "Database error: " + error.message;
     btn.disabled = false;
     return;
   }
 
-  // 2. LOGICA TRUE/FALSE PARA E-MAIL
+  // 5. Enviar para Formspree (Opcional)
   if (EMAILS_ENABLED) {
-    await fetch(FORMSPREE_URL, {
+    fetch(FORMSPREE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, text })
+      body: JSON.stringify({ name, email, message: text })
     });
-    info.textContent = "Postado e e-mail enviado!";
-  } else {
-    info.textContent = "Postado apenas no mural (E-mail desativado).";
   }
 
+  // Sucesso
+  localStorage.setItem(key, count + 1);
+  status.style.color = "green";
+  status.textContent = "Message posted successfully!";
   document.getElementById("guestbookForm").reset();
+  grecaptcha.reset();
   btn.disabled = false;
-  renderMessages();
+  loadMessages(); // Atualiza a lista
 });
 
-/* Inicializar */
-renderMessages();
+// Iniciar
+loadMessages();
 </script>
+
 </body>
 </html>
