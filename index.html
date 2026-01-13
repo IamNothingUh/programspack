@@ -47,12 +47,12 @@
   </td>
   <td style="border:1px solid #000;padding:10px;text-align:center;">2.5 MB</td>
   <td style="border:1px solid #000;padding:10px;text-align:center;">
-    <button onclick="downloadGate()">DOWNLOAD .ZIP</button>
+    <button onclick="downloadGate()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .ZIP</button>
   </td>
 </tr>
 </table>
 
-<p>Total Downloads: <span id="gate-downloads">0</span></p>
+<p>Total Downloads (Local): <span id="gate-downloads">0</span></p>
 </div>
 
 <div id="comments">
@@ -66,7 +66,7 @@
 
   <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div><br>
 
-  <button id="postBtn" onclick="addComment()">POST MESSAGE</button>
+  <button id="postBtn" onclick="addComment()" style="cursor:pointer;">POST MESSAGE</button>
 </div>
 
 <h3>Entries (<span id="commentCount">0</span>)</h3>
@@ -83,9 +83,9 @@
 
 <script>
 /* === CONFIGURAÇÃO SUPABASE === */
-const SB_URL = "SUA_URL_DO_SUPABASE_AQUI";
-const SB_KEY = "SUA_ANON_KEY_AQUI";
-const supabase = supabase.createClient(SB_URL, SB_KEY);
+const SB_URL = "COLE_SUA_URL_DO_SUPABASE_AQUI";
+const SB_KEY = "COLE_SUA_ANON_KEY_AQUI";
+const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
 function sanitize(str){
   const d=document.createElement("div");
@@ -93,15 +93,19 @@ function sanitize(str){
   return d.innerHTML;
 }
 
+// === FUNÇÃO DE DOWNLOAD ATUALIZADA ===
 function downloadGate(){
-  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip","_blank");
+  // Abre o link em nova aba
+  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip", "_blank");
+  
+  // Contador local
   let d=parseInt(localStorage.getItem("gateDownloads")||"0");
   d++;
-  localStorage.setItem("gateDownloads",d);
-  document.getElementById("gate-downloads").textContent=d;
+  localStorage.setItem("gateDownloads", d);
+  document.getElementById("gate-downloads").textContent = d;
 }
 
-// === FUNÇÃO ADICIONAR COMENTÁRIO (AGORA COM SUPABASE) ===
+// === ADICIONAR COMENTÁRIO (SUPABASE) ===
 async function addComment(){
   if(grecaptcha.getResponse()===""){
     alert("Complete the CAPTCHA first.");
@@ -118,8 +122,7 @@ async function addComment(){
 
   document.getElementById("postBtn").disabled = true;
 
-  // Envia para a sua tabela 'database' no Supabase
-  const { error } = await supabase
+  const { error } = await supabaseClient
     .from('database')
     .insert([{ name: name, text: text }]);
 
@@ -129,29 +132,26 @@ async function addComment(){
     document.getElementById("commentName").value="";
     document.getElementById("commentText").value="";
     grecaptcha.reset();
-    displayComments(); // Atualiza a lista
+    displayComments();
   }
   
   document.getElementById("postBtn").disabled = false;
 }
 
-// === FUNÇÃO EXIBIR COMENTÁRIOS (BUSCANDO DO SUPABASE) ===
+// === EXIBIR COMENTÁRIOS (SUPABASE) ===
 async function displayComments(){
-  const { data: comments, error } = await supabase
+  const { data: comments, error } = await supabaseClient
     .from('database')
     .select('*')
     .order('created_at', { ascending: false });
 
-  if(error) {
-    console.log("Erro ao buscar:", error);
-    return;
-  }
+  if(error) return;
 
   const box = document.getElementById("commentsContainer");
-  document.getElementById("commentCount").textContent = comments.length;
+  document.getElementById("commentCount").textContent = comments ? comments.length : 0;
   box.innerHTML = "";
 
-  if(comments.length === 0){
+  if(!comments || comments.length === 0){
     document.getElementById("noComments").style.display = "block";
     return;
   }
