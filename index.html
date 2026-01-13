@@ -4,150 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>stupid collabvm pack</title>
-
-  <!-- reCAPTCHA v2 -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
-<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background-color:#c0c0c0;color:#000;">
+<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background:#c0c0c0;color:#000;">
 
 <div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
 
-<marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-*** ATENÇÃO: NEW TOOLS ADDED! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
-</marquee>
+  <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
+    *** ATENÇÃO: NEW TOOLS ADDED! - GUESTBOOK ONLINE - WELCOME TO THE HUB ***
+  </marquee>
 
-<div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
-  <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
-  <p style="margin:0;font-size:1.2em;font-style:italic;color:#444;">
-    "Stupid Ass Shit Things for CollabVM"
-  </p>
+  <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
+    <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
+    <p style="margin:0;font-style:italic;color:#444;">"Stupid Ass Shit Things for CollabVM"</p>
+  </div>
+
+  <div style="text-align:center;background:#eee;padding:10px;border:1px inset #fff;margin-bottom:30px;">
+    <a href="#downloads" style="margin:0 15px;font-weight:bold;">[DOWNLOADS]</a>
+    <a href="#comments" style="margin:0 15px;font-weight:bold;">[GUESTBOOK]</a>
+    <a href="#about" style="margin:0 15px;font-weight:bold;">[ABOUT]</a>
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div id="downloads" style="margin-bottom:40px;">
+    <h2 style="background:#000080;color:#fff;padding:5px 10px;">Software Repository</h2>
+
+    <table style="width:100%;border-collapse:collapse;border:2px solid #000;margin-top:10px;">
+      <tr style="background:#d3d3d3;">
+        <th style="border:1px solid #000;padding:10px;text-align:left;">File</th>
+        <th style="border:1px solid #000;padding:10px;">Size</th>
+        <th style="border:1px solid #000;padding:10px;">Action</th>
+      </tr>
+      <tr>
+        <td style="border:1px solid #000;padding:10px;">
+          <strong>Gate</strong><br>
+          <small>VPN Gate tool</small>
+        </td>
+        <td style="border:1px solid #000;padding:10px;text-align:center;">2.5 MB</td>
+        <td style="border:1px solid #000;padding:10px;text-align:center;">
+          <a href="https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip"
+             target="_blank"
+             style="padding:5px 10px;border:2px outset #fff;background:#ddd;font-weight:bold;text-decoration:none;">
+            DOWNLOAD
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- GUESTBOOK -->
+  <div id="comments" style="margin-bottom:40px;">
+    <h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
+
+    <div style="background:#f9f9f9;border:1px solid #888;padding:15px;">
+      <h3>Sign the Book</h3>
+
+      <form action="https://formspree.io/f/xzddbakn" method="POST">
+        <div style="margin-bottom:10px;">
+          <input type="text" name="name" placeholder="Your Alias" required style="width:200px;padding:5px;">
+          <input type="email" name="email" placeholder="Email (optional)" style="width:200px;padding:5px;">
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <textarea name="message" placeholder="Write your message..." required
+            style="width:100%;height:70px;padding:5px;"></textarea>
+        </div>
+
+        <!-- extras do Formspree -->
+        <input type="hidden" name="_subject" value="New Guestbook Message">
+        <input type="hidden" name="_template" value="table">
+
+        <button type="submit" style="padding:5px 20px;font-weight:bold;cursor:pointer;">
+          POST MESSAGE
+        </button>
+      </form>
+
+      <p style="font-size:0.85em;color:#666;margin-top:10px;">
+        Messages are sent directly to the site owner.
+      </p>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;">
+    <h2>About</h2>
+    <p>Just a guy sharing CollabVM stuff.</p>
+    <a href="https://github.com/IamNothingUh" target="_blank"
+       style="background:#000;color:#fff;padding:10px;text-decoration:none;font-weight:bold;">
+      VISIT MY GITHUB
+    </a>
+  </div>
+
+  <div style="text-align:center;margin-top:30px;border-top:2px solid #000;padding-top:10px;font-size:0.8em;">
+    <p>© 2026 — Guestbook powered by Formspree</p>
+  </div>
+
 </div>
-
-<div style="margin-bottom:30px;text-align:center;background:#eee;padding:10px;border:1px inset #fff;">
-  <a href="#downloads">[DOWNLOADS]</a>
-  <a href="#projects">[PROJECTS]</a>
-  <a href="#comments">[GUESTBOOK]</a>
-  <a href="#about">[ABOUT]</a>
-</div>
-
-<div id="downloads" style="margin-bottom:40px;">
-<h2 style="background:#000080;color:#fff;padding:5px 10px;">Software Repository</h2>
-
-<table style="width:100%;border-collapse:collapse;border:2px solid #000;">
-<tr style="background:#d3d3d3;">
-  <th style="border:1px solid #000;padding:10px;text-align:left;">File Name</th>
-  <th style="border:1px solid #000;padding:10px;">Size</th>
-  <th style="border:1px solid #000;padding:10px;">Action</th>
-</tr>
-<tr>
-  <td style="border:1px solid #000;padding:10px;">
-    <strong>Gate</strong><br><small>VPN Gate tool for CollabVM</small>
-  </td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">2.5 MB</td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">
-    <button onclick="downloadGate()">DOWNLOAD .ZIP</button>
-  </td>
-</tr>
-</table>
-
-<p>Total Downloads: <span id="gate-downloads">0</span></p>
-</div>
-
-<div id="comments">
-<h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
-
-<div style="background:#f9f9f9;border:1px solid #888;padding:15px;margin-bottom:20px;">
-  <h3>Sign the Book:</h3>
-
-  <input type="text" id="commentName" placeholder="Your Alias"><br><br>
-  <textarea id="commentText" placeholder="Write your message..." style="width:100%;height:60px;"></textarea><br><br>
-
-  <!-- reCAPTCHA -->
-  <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div><br>
-
-  <button onclick="addComment()">POST MESSAGE</button>
-</div>
-
-<h3>Entries (<span id="commentCount">0</span>)</h3>
-<div id="commentsContainer"></div>
-<p id="noComments">The guestbook is empty. Say hello!</p>
-</div>
-
-<div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;">
-<h2>About Me</h2>
-<p>Just a guy sharing CollabVM stuff.</p>
-</div>
-
-</div>
-
-<script>
-function sanitize(str){
-  const d=document.createElement("div");
-  d.textContent=str;
-  return d.innerHTML;
-}
-
-function downloadGate(){
-  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip","_blank");
-  let d=parseInt(localStorage.getItem("gateDownloads")||"0");
-  d++;
-  localStorage.setItem("gateDownloads",d);
-  document.getElementById("gate-downloads").textContent=d;
-}
-
-function addComment(){
-  if(grecaptcha.getResponse()===""){
-    alert("Complete the CAPTCHA first.");
-    return;
-  }
-
-  const name=sanitize(document.getElementById("commentName").value.trim());
-  const text=sanitize(document.getElementById("commentText").value.trim());
-
-  if(!name||!text){
-    alert("Name and message required.");
-    return;
-  }
-
-  let c=JSON.parse(localStorage.getItem("comments")||"[]");
-  c.push({name,text,date:new Date().toLocaleString()});
-  localStorage.setItem("comments",JSON.stringify(c));
-
-  document.getElementById("commentName").value="";
-  document.getElementById("commentText").value="";
-  grecaptcha.reset();
-  displayComments();
-}
-
-function displayComments(){
-  const c=JSON.parse(localStorage.getItem("comments")||"[]");
-  const box=document.getElementById("commentsContainer");
-  document.getElementById("commentCount").textContent=c.length;
-  box.innerHTML="";
-
-  if(c.length===0){
-    document.getElementById("noComments").style.display="block";
-    return;
-  }
-  document.getElementById("noComments").style.display="none";
-
-  c.slice().reverse().forEach(e=>{
-    const d=document.createElement("div");
-    d.innerHTML="<b>"+e.name+"</b> ("+e.date+")<br>"+e.text;
-    d.style.border="1px solid #ccc";
-    d.style.padding="10px";
-    d.style.marginBottom="10px";
-    box.appendChild(d);
-  });
-}
-
-window.onload=()=>{
-  document.getElementById("gate-downloads").textContent=
-    localStorage.getItem("gateDownloads")||0;
-  displayComments();
-};
-</script>
-
 </body>
 </html>
