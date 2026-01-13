@@ -2,173 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>stupid collabvm pack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>stupid collabvm pack</title>
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background:#c0c0c0;color:#000;">
+<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background-color:#c0c0c0;color:#000;">
 
 <div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
 
-  <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-    *** GUESTBOOK PROTECTED — SUPABASE + CAPTCHA + LIMIT + ANTISPAM ***
-  </marquee>
+<marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
+*** ATENÇÃO: NEW TOOLS ADDED! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
+</marquee>
 
-  <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
-    <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
-    <p style="margin:0;font-style:italic;color:#444;">"Stupid Ass Shit Things for CollabVM"</p>
-  </div>
+<div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
+  <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
+  <p style="margin:0;font-size:1.2em;font-style:italic;color:#444;">
+    "Stupid Ass Shit Things for CollabVM"
+  </p>
+</div>
 
-  <div id="comments">
-    <h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
-    <div style="background:#f9f9f9;border:1px solid #888;padding:15px;">
+<div style="margin-bottom:30px;text-align:center;background:#eee;padding:10px;border:1px inset #fff;">
+  <a href="#downloads">[DOWNLOADS]</a>
+  <a href="#projects">[PROJECTS]</a>
+  <a href="#comments">[GUESTBOOK]</a>
+  <a href="#about">[ABOUT]</a>
+</div>
 
-      <form id="guestbookForm">
-        <div style="margin-bottom:10px;">
-          <input type="text" id="formName" name="name" placeholder="Your Alias" required style="width:200px;padding:5px;">
-          <input type="email" id="formEmail" name="email" placeholder="Email (optional)" style="width:200px;padding:5px;">
-        </div>
+<div id="downloads" style="margin-bottom:40px;">
+<h2 style="background:#000080;color:#fff;padding:5px 10px;">Software Repository</h2>
 
-        <div style="margin-bottom:10px;">
-          <textarea id="formMessage" name="message" placeholder="Write your message..." required
-            style="width:100%;height:70px;padding:5px;"></textarea>
-        </div>
+<table style="width:100%;border-collapse:collapse;border:2px solid #000;">
+<tr style="background:#d3d3d3;">
+  <th style="border:1px solid #000;padding:10px;text-align:left;">File Name</th>
+  <th style="border:1px solid #000;padding:10px;">Size</th>
+  <th style="border:1px solid #000;padding:10px;">Action</th>
+</tr>
+<tr>
+  <td style="border:1px solid #000;padding:10px;">
+    <strong>Gate</strong><br><small>VPN Gate tool for CollabVM</small>
+  </td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">2.5 MB</td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">
+    <button onclick="downloadGate()">DOWNLOAD .ZIP</button>
+  </td>
+</tr>
+</table>
 
-        <div style="display:none;">
-          <input type="text" id="honeypot" name="website">
-        </div>
+<p>Total Downloads: <span id="gate-downloads">0</span></p>
+</div>
 
-        <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div>
+<div id="comments">
+<h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
 
-        <br>
-        <button type="submit" id="btnPost" style="padding:5px 20px;font-weight:bold;cursor:pointer;">
-          POST MESSAGE
-        </button>
-      </form>
+<div style="background:#f9f9f9;border:1px solid #888;padding:15px;margin-bottom:20px;">
+  <h3>Sign the Book:</h3>
 
-      <p id="statusMsg" style="display:none;font-weight:bold;margin-top:10px;"></p>
-    </div>
-  </div>
+  <input type="text" id="commentName" placeholder="Your Alias"><br><br>
+  <textarea id="commentText" placeholder="Write your message..." style="width:100%;height:60px;"></textarea><br><br>
 
-  <div id="messageList" style="margin-top:20px;">
-    <p style="text-align:center;">Loading messages from database...</p>
-  </div>
+  <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div><br>
 
-  <div style="text-align:center;margin-top:30px;border-top:2px solid #000;padding-top:10px;font-size:0.8em;">
-    © 2026 — Guestbook powered by Supabase & Formspree
-  </div>
+  <button id="postBtn" onclick="addComment()">POST MESSAGE</button>
+</div>
+
+<h3>Entries (<span id="commentCount">0</span>)</h3>
+<div id="commentsContainer"></div>
+<p id="noComments">The guestbook is empty. Say hello!</p>
+</div>
+
+<div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;">
+<h2>About Me</h2>
+<p>Just a guy sharing CollabVM stuff.</p>
+</div>
+
 </div>
 
 <script>
-/* ===== CONFIGURAÇÃO SUPABASE ===== */
-const SUPABASE_URL = "COLE_SUA_URL_AQUI";
-const SUPABASE_KEY = "COLE_SUA_ANON_KEY_AQUI";
-const EMAILS_ENABLED = false; // Mude para true se quiser que envie para o Formspree também
-const FORMSPREE_URL = "https://formspree.io/f/xzddbakn";
+/* === CONFIGURAÇÃO SUPABASE === */
+const SB_URL = "SUA_URL_DO_SUPABASE_AQUI";
+const SB_KEY = "SUA_ANON_KEY_AQUI";
+const supabase = supabase.createClient(SB_URL, SB_KEY);
 
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-/* ===== FUNÇÕES DE CONTROLE ===== */
-function todayKey() {
-  const d = new Date();
-  return `guestbook_${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+function sanitize(str){
+  const d=document.createElement("div");
+  d.textContent=str;
+  return d.innerHTML;
 }
 
-// Carregar mensagens do Supabase
-async function loadMessages() {
-  const list = document.getElementById("messageList");
-  const { data, error } = await supabaseClient
-    .from('database') // Nome da sua tabela
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    list.innerHTML = "<p>Error loading messages.</p>";
-    return;
-  }
-
-  list.innerHTML = data.map(m => `
-    <div style="border:1px solid #888; background:#eee; padding:10px; margin-bottom:10px;">
-      <div style="display:flex; justify-content:space-between; font-size:0.8em; color:#444; border-bottom:1px solid #ccc; margin-bottom:5px;">
-        <b>${m.name.replace(/</g, "&lt;")}</b>
-        <span>${new Date(m.created_at).toLocaleString()}</span>
-      </div>
-      <div style="word-wrap:break-word;">${m.text.replace(/</g, "&lt;")}</div>
-    </div>
-  `).join('');
+function downloadGate(){
+  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip","_blank");
+  let d=parseInt(localStorage.getItem("gateDownloads")||"0");
+  d++;
+  localStorage.setItem("gateDownloads",d);
+  document.getElementById("gate-downloads").textContent=d;
 }
 
-// Lógica de Envio
-document.getElementById("guestbookForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  
-  const status = document.getElementById("statusMsg");
-  const btn = document.getElementById("btnPost");
-  const name = document.getElementById("formName").value;
-  const text = document.getElementById("formMessage").value;
-  const email = document.getElementById("formEmail").value;
-  const isBot = document.getElementById("honeypot").value;
-
-  // 1. Honeypot check
-  if (isBot) return;
-
-  // 2. Limite diário (localStorage)
-  const key = todayKey();
-  let count = parseInt(localStorage.getItem(key) || "0");
-  if (count >= 3) {
-    status.style.display = "block";
-    status.style.color = "red";
-    status.textContent = "Daily limit reached (3 messages per day).";
+// === FUNÇÃO ADICIONAR COMENTÁRIO (AGORA COM SUPABASE) ===
+async function addComment(){
+  if(grecaptcha.getResponse()===""){
+    alert("Complete the CAPTCHA first.");
     return;
   }
 
-  // 3. reCAPTCHA check
-  if (grecaptcha.getResponse().length === 0) {
-    alert("Please complete the reCAPTCHA.");
+  const name = sanitize(document.getElementById("commentName").value.trim());
+  const text = sanitize(document.getElementById("commentText").value.trim());
+
+  if(!name || !text){
+    alert("Name and message required.");
     return;
   }
 
-  btn.disabled = true;
-  status.style.display = "block";
-  status.style.color = "blue";
-  status.textContent = "Sending to database...";
+  document.getElementById("postBtn").disabled = true;
 
-  // 4. Salvar no Supabase
-  const { error } = await supabaseClient
+  // Envia para a sua tabela 'database' no Supabase
+  const { error } = await supabase
     .from('database')
     .insert([{ name: name, text: text }]);
 
-  if (error) {
-    status.style.color = "red";
-    status.textContent = "Database error: " + error.message;
-    btn.disabled = false;
+  if(error) {
+    alert("Erro ao salvar: " + error.message);
+  } else {
+    document.getElementById("commentName").value="";
+    document.getElementById("commentText").value="";
+    grecaptcha.reset();
+    displayComments(); // Atualiza a lista
+  }
+  
+  document.getElementById("postBtn").disabled = false;
+}
+
+// === FUNÇÃO EXIBIR COMENTÁRIOS (BUSCANDO DO SUPABASE) ===
+async function displayComments(){
+  const { data: comments, error } = await supabase
+    .from('database')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if(error) {
+    console.log("Erro ao buscar:", error);
     return;
   }
 
-  // 5. Enviar para Formspree (Opcional)
-  if (EMAILS_ENABLED) {
-    fetch(FORMSPREE_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message: text })
-    });
+  const box = document.getElementById("commentsContainer");
+  document.getElementById("commentCount").textContent = comments.length;
+  box.innerHTML = "";
+
+  if(comments.length === 0){
+    document.getElementById("noComments").style.display = "block";
+    return;
   }
+  document.getElementById("noComments").style.display = "none";
 
-  // Sucesso
-  localStorage.setItem(key, count + 1);
-  status.style.color = "green";
-  status.textContent = "Message posted successfully!";
-  document.getElementById("guestbookForm").reset();
-  grecaptcha.reset();
-  btn.disabled = false;
-  loadMessages(); // Atualiza a lista
-});
+  comments.forEach(e => {
+    const d = document.createElement("div");
+    const date = new Date(e.created_at).toLocaleString();
+    d.innerHTML = "<b>" + e.name + "</b> (" + date + ")<br>" + e.text;
+    d.style.border = "1px solid #ccc";
+    d.style.padding = "10px";
+    d.style.marginBottom = "10px";
+    d.style.background = "#fff";
+    box.appendChild(d);
+  });
+}
 
-// Iniciar
-loadMessages();
+window.onload = () => {
+  document.getElementById("gate-downloads").textContent = localStorage.getItem("gateDownloads") || 0;
+  displayComments();
+};
 </script>
 
 </body>
