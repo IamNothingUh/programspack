@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>stupid collabvm pack</title>
+  <title>Stupid CollabVM Pack</title>
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -14,7 +14,7 @@
 <div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
 
 <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-cool ***
+*** ATTENTION: VMANTIKILL ADDED! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
 </marquee>
 
 <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
@@ -53,7 +53,7 @@ cool ***
 
 <tr>
   <td style="border:1px solid #000;padding:10px;">
-    <strong>VMAntiKill v1.0.4</strong><br><small>stop stupid forkies that want put memez buaa buaa buaa</small>
+    <strong>VMAntiKill v1.0.4</strong><br><small>Protects vital processes from being forced closed.</small>
   </td>
   <td style="border:1px solid #000;padding:10px;text-align:center;">1.1 MB</td>
   <td style="border:1px solid #000;padding:10px;text-align:center;">
@@ -62,7 +62,7 @@ cool ***
 </tr>
 </table>
 
-<p style="font-size: 0.9em; color: #555;">Downloads realizados nesta sessão: <span id="session-downloads">0</span></p>
+<p style="font-size: 0.9em; color: #555;">Downloads this session: <span id="session-downloads">0</span></p>
 </div>
 
 <div id="comments">
@@ -91,10 +91,10 @@ cool ***
 </div>
 
 <script>
-/* === CONFIGURAÇÃO SUPABASE === */
-// Lembre-se de substituir pelas suas chaves reais do Supabase
-const SB_URL = "COLE_SUA_URL_DO_SUPABASE_AQUI";
-const SB_KEY = "COLE_SUA_ANON_KEY_AQUI";
+/* === SUPABASE CONFIGURATION === */
+// Replace with your actual Supabase URL and Anon Key
+const SB_URL = "YOUR_SUPABASE_URL_HERE";
+const SB_KEY = "YOUR_SUPABASE_ANON_KEY_HERE";
 const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
 function sanitize(str){
@@ -103,7 +103,7 @@ function sanitize(str){
   return d.innerHTML;
 }
 
-// Contador de cliques simples
+// Simple session click counter
 function updateCounter() {
   let count = parseInt(sessionStorage.getItem("totalClicks") || "0");
   count++;
@@ -111,7 +111,7 @@ function updateCounter() {
   document.getElementById("session-downloads").textContent = count;
 }
 
-/* === FUNÇÕES DE DOWNLOAD === */
+/* === DOWNLOAD FUNCTIONS === */
 function downloadGate(){
   window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip", "_blank");
   updateCounter();
@@ -125,7 +125,7 @@ function downloadVMAntiKill(){
 /* === GUESTBOOK (SUPABASE) === */
 async function addComment(){
   if(grecaptcha.getResponse()===""){
-    alert("Complete the CAPTCHA first.");
+    alert("Please complete the CAPTCHA first.");
     return;
   }
 
@@ -133,7 +133,7 @@ async function addComment(){
   const text = sanitize(document.getElementById("commentText").value.trim());
 
   if(!name || !text){
-    alert("Name and message required.");
+    alert("Name and message are required.");
     return;
   }
 
@@ -144,7 +144,7 @@ async function addComment(){
     .insert([{ name: name, text: text }]);
 
   if(error) {
-    alert("Erro ao salvar: " + error.message);
+    alert("Error saving message: " + error.message);
   } else {
     document.getElementById("commentName").value="";
     document.getElementById("commentText").value="";
@@ -156,7 +156,6 @@ async function addComment(){
 }
 
 async function displayComments(){
-  // Tenta carregar comentários, mas não trava se as chaves do Supabase estiverem vazias
   try {
     const { data: comments, error } = await supabaseClient
       .from('database')
@@ -186,7 +185,7 @@ async function displayComments(){
       box.appendChild(d);
     });
   } catch (e) {
-    console.log("Supabase não configurado ou erro de conexão.");
+    console.log("Supabase not configured or connection error.");
   }
 }
 
@@ -197,4 +196,3 @@ window.onload = () => {
 
 </body>
 </html>
-
