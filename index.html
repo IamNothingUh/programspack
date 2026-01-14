@@ -6,7 +6,6 @@
   <title>stupid collabvm pack</title>
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -15,7 +14,7 @@
 <div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
 
 <marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-*** ATENÇÃO: NEW TOOLS ADDED! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
+*** ATENÇÃO: VMAntiKill ADICIONADO! - SECURITY PATCH APPLIED TO GUESTBOOK - WELCOME TO THE HUB ***
 </marquee>
 
 <div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
@@ -41,6 +40,7 @@
   <th style="border:1px solid #000;padding:10px;">Size</th>
   <th style="border:1px solid #000;padding:10px;">Action</th>
 </tr>
+
 <tr>
   <td style="border:1px solid #000;padding:10px;">
     <strong>Gate</strong><br><small>VPN Gate tool for CollabVM</small>
@@ -50,9 +50,19 @@
     <button onclick="downloadGate()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .ZIP</button>
   </td>
 </tr>
+
+<tr>
+  <td style="border:1px solid #000;padding:10px;">
+    <strong>VMAntiKill v1.0.4</strong><br><small>Protege processos vitais contra encerramento forçado.</small>
+  </td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">1.1 MB</td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">
+    <button onclick="downloadVMAntiKill()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .EXE</button>
+  </td>
+</tr>
 </table>
 
-<p>Total Downloads (Local): <span id="gate-downloads">0</span></p>
+<p style="font-size: 0.9em; color: #555;">Downloads realizados nesta sessão: <span id="session-downloads">0</span></p>
 </div>
 
 <div id="comments">
@@ -60,7 +70,6 @@
 
 <div style="background:#f9f9f9;border:1px solid #888;padding:15px;margin-bottom:20px;">
   <h3>Sign the Book:</h3>
-
   <input type="text" id="commentName" placeholder="Your Alias"><br><br>
   <textarea id="commentText" placeholder="Write your message..." style="width:100%;height:60px;"></textarea><br><br>
 
@@ -74,7 +83,7 @@
 <p id="noComments">The guestbook is empty. Say hello!</p>
 </div>
 
-<div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;">
+<div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;margin-top:20px;">
 <h2>About Me</h2>
 <p>Just a guy sharing CollabVM stuff.</p>
 </div>
@@ -83,6 +92,7 @@
 
 <script>
 /* === CONFIGURAÇÃO SUPABASE === */
+// Lembre-se de substituir pelas suas chaves reais do Supabase
 const SB_URL = "COLE_SUA_URL_DO_SUPABASE_AQUI";
 const SB_KEY = "COLE_SUA_ANON_KEY_AQUI";
 const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
@@ -93,19 +103,26 @@ function sanitize(str){
   return d.innerHTML;
 }
 
-// === FUNÇÃO DE DOWNLOAD ATUALIZADA ===
-function downloadGate(){
-  // Abre o link em nova aba
-  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip", "_blank");
-  
-  // Contador local
-  let d=parseInt(localStorage.getItem("gateDownloads")||"0");
-  d++;
-  localStorage.setItem("gateDownloads", d);
-  document.getElementById("gate-downloads").textContent = d;
+// Contador de cliques simples
+function updateCounter() {
+  let count = parseInt(sessionStorage.getItem("totalClicks") || "0");
+  count++;
+  sessionStorage.setItem("totalClicks", count);
+  document.getElementById("session-downloads").textContent = count;
 }
 
-// === ADICIONAR COMENTÁRIO (SUPABASE) ===
+/* === FUNÇÕES DE DOWNLOAD === */
+function downloadGate(){
+  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/vpn_gate/gate321.zip", "_blank");
+  updateCounter();
+}
+
+function downloadVMAntiKill(){
+  window.open("https://github.com/theDesConnet/VMAntiKill/releases/download/v1.0.4/vmac_v1.0.4-win32.exe", "_blank");
+  updateCounter();
+}
+
+/* === GUESTBOOK (SUPABASE) === */
 async function addComment(){
   if(grecaptcha.getResponse()===""){
     alert("Complete the CAPTCHA first.");
@@ -138,39 +155,42 @@ async function addComment(){
   document.getElementById("postBtn").disabled = false;
 }
 
-// === EXIBIR COMENTÁRIOS (SUPABASE) ===
 async function displayComments(){
-  const { data: comments, error } = await supabaseClient
-    .from('database')
-    .select('*')
-    .order('created_at', { ascending: false });
+  // Tenta carregar comentários, mas não trava se as chaves do Supabase estiverem vazias
+  try {
+    const { data: comments, error } = await supabaseClient
+      .from('database')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if(error) return;
+    if(error) throw error;
 
-  const box = document.getElementById("commentsContainer");
-  document.getElementById("commentCount").textContent = comments ? comments.length : 0;
-  box.innerHTML = "";
+    const box = document.getElementById("commentsContainer");
+    document.getElementById("commentCount").textContent = comments ? comments.length : 0;
+    box.innerHTML = "";
 
-  if(!comments || comments.length === 0){
-    document.getElementById("noComments").style.display = "block";
-    return;
+    if(!comments || comments.length === 0){
+      document.getElementById("noComments").style.display = "block";
+      return;
+    }
+    document.getElementById("noComments").style.display = "none";
+
+    comments.forEach(e => {
+      const d = document.createElement("div");
+      const date = new Date(e.created_at).toLocaleString();
+      d.innerHTML = "<b>" + e.name + "</b> (" + date + ")<br>" + e.text;
+      d.style.border = "1px solid #ccc";
+      d.style.padding = "10px";
+      d.style.marginBottom = "10px";
+      d.style.background = "#fff";
+      box.appendChild(d);
+    });
+  } catch (e) {
+    console.log("Supabase não configurado ou erro de conexão.");
   }
-  document.getElementById("noComments").style.display = "none";
-
-  comments.forEach(e => {
-    const d = document.createElement("div");
-    const date = new Date(e.created_at).toLocaleString();
-    d.innerHTML = "<b>" + e.name + "</b> (" + date + ")<br>" + e.text;
-    d.style.border = "1px solid #ccc";
-    d.style.padding = "10px";
-    d.style.marginBottom = "10px";
-    d.style.background = "#fff";
-    box.appendChild(d);
-  });
 }
 
 window.onload = () => {
-  document.getElementById("gate-downloads").textContent = localStorage.getItem("gateDownloads") || 0;
   displayComments();
 };
 </script>
