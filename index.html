@@ -60,6 +60,17 @@
     <button onclick="downloadVMAntiKill()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .EXE</button>
   </td>
 </tr>
+
+<tr>
+  <td style="border:1px solid #000;padding:10px;">
+    <strong>RoNET</strong><br><small>Roblox Compatible with collabnet</small>
+  </td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">3.2 MB</td>
+  <td style="border:1px solid #000;padding:10px;text-align:center;">
+    <button onclick="downloadCollabNET()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .ZIP</button>
+  </td>
+</tr>
+
 </table>
 
 <p style="font-size: 0.9em; color: #555;">Downloads this session: <span id="session-downloads">0</span></p>
@@ -119,6 +130,11 @@ function downloadGate(){
 
 function downloadVMAntiKill(){
   window.open("https://github.com/IamNothingUh/forkpack-/releases/download/antifork/acvm.exe", "_blank");
+  updateCounter();
+}
+
+function downloadCollabNET(){
+  window.open("https://github.com/IamNothingUh/forkpack-/releases/download/CollabNET_Bypass/WEAO-LIVE-WindowsPlayer-version-1588a9c58c674e38.7z", "_blank");
   updateCounter();
 }
 
@@ -196,4 +212,3 @@ window.onload = () => {
 
 </body>
 </html>
-
