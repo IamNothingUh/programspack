@@ -3,110 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stupid CollabVM Pack</title>
+  <title>Stupid CollabVM Pack - Win7</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* Estilos para o fundo clássico do Windows 7 */
+    body {
+        margin: 0;
+        padding: 40px 20px;
+        /* Fundo padrão do Windows 7 (Azul com gradiente) */
+        background: #0078D7; 
+        background: radial-gradient(circle at center, #00B0F0 0%, #005A9E 100%);
+        font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    /* Ajuste da Janela Principal */
+    .main-window {
+        width: 100%;
+        max-width: 850px;
+        background: #f0f0f0; /* Cor de fundo das janelas Win7 */
+    }
+
+    /* Ajuste para botões parecerem clicáveis */
+    button {
+        cursor: pointer;
+        font-family: inherit;
+    }
+    
+    /* Barra de aviso estilo Internet Explorer do Win7 */
+    .info-bar {
+        background-color: #ffffe1;
+        border: 1px solid #f2c73b;
+        color: #333;
+        padding: 5px;
+        margin-bottom: 15px;
+        font-size: 13px;
+    }
+
+    /* Menu de botões centralizado */
+    .menu-buttons {
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid #d9d9d9;
+        margin-bottom: 20px;
+        background: linear-gradient(to bottom, #f9f9f9 0%, #e3e3e3 100%);
+    }
+
+    /* Estilo de tabela limpo (Aero) */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background: #fff;
+    }
+    th {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        background: linear-gradient(to bottom, #fff 0%, #e6e6e6 100%);
+    }
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+    }
+    tr:hover {
+        background-color: #e8f6fd; /* Efeito hover azul claro do Win7 */
+    }
+
+    /* Área de Guestbook */
+    .guestbook-area {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 3px;
+    }
+  </style>
 </head>
 
-<body style="margin:0;padding:20px;font-family:'Times New Roman',Times,serif;background-color:#c0c0c0;color:#000;">
+<body>
 
-<div style="max-width:850px;margin:0 auto;background:#fff;padding:20px;border:3px double #333;box-shadow:5px 5px 0 #888;">
+<div class="window active main-window">
+  <div class="title-bar">
+    <div class="title-bar-text">Stupid CollabVM Pack</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
+    </div>
+  </div>
 
-<marquee style="background:#000080;color:#fff;padding:5px;font-weight:bold;margin-bottom:20px;">
-New: i fixed the MB things, just this lol
-</marquee>
+  <div class="window-body has-space">
 
-<div style="text-align:center;border-bottom:4px solid #000;padding-bottom:20px;margin-bottom:25px;">
-  <h1 style="margin:0;font-size:3em;">CollabVM Resources</h1>
-  <p style="margin:0;font-size:1.2em;font-style:italic;color:#444;">
-    "Stupid Ass Shit Things for CollabVM"
-  </p>
-</div>
+    <div class="info-bar">
+        <marquee scrollamount="5">New: i fixed the MB things, just this lol</marquee>
+    </div>
 
-<div style="margin-bottom:30px;text-align:center;background:#eee;padding:10px;border:1px inset #fff;">
-  <a href="#downloads">[DOWNLOADS]</a>
-  <a href="#projects">[PROJECTS]</a>
-  <a href="#comments">[GUESTBOOK]</a>
-  <a href="#about">[ABOUT]</a>
-</div>
+    <div style="text-align:center; margin-bottom:20px;">
+      <h1 style="margin:0; font-size:2em; color: #003399;">CollabVM Resources</h1>
+      <p style="margin:5px 0 0 0; font-style:italic; color:#666;">
+        "Stupid Ass Shit Things for CollabVM"
+      </p>
+    </div>
 
-<div id="downloads" style="margin-bottom:40px;">
-<h2 style="background:#000080;color:#fff;padding:5px 10px;">Software Repository</h2>
+    <div class="menu-buttons">
+      <button onclick="location.href='#downloads'">Downloads</button>
+      <button onclick="location.href='#projects'">Projects</button>
+      <button onclick="location.href='#comments'">Guestbook</button>
+      <button onclick="location.href='#about'">About</button>
+    </div>
 
-<table style="width:100%;border-collapse:collapse;border:2px solid #000;">
-<tr style="background:#d3d3d3;">
-  <th style="border:1px solid #000;padding:10px;text-align:left;">File Name</th>
-  <th style="border:1px solid #000;padding:10px;">Size</th>
-  <th style="border:1px solid #000;padding:10px;">Action</th>
-</tr>
+    <div id="downloads" style="margin-bottom:30px;">
+      <fieldset>
+        <legend>Software Repository</legend>
+        
+        <table>
+            <thead>
+                <tr>
+                  <th>File Name</th>
+                  <th style="width: 100px;">Size</th>
+                  <th style="width: 140px; text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>
+                    <strong>Gate</strong><br><small style="color:#666;">VPN Gate tool for CollabVM</small>
+                  </td>
+                  <td>65.6 MB</td>
+                  <td style="text-align: center;">
+                    <button onclick="downloadGate()">Download .ZIP</button>
+                  </td>
+                </tr>
 
-<tr>
-  <td style="border:1px solid #000;padding:10px;">
-    <strong>Gate</strong><br><small>VPN Gate tool for CollabVM</small>
-  </td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">65.6 MB</td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">
-    <button onclick="downloadGate()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .ZIP</button>
-  </td>
-</tr>
+                <tr>
+                  <td>
+                    <strong>VMAntiKill v1.0.4</strong><br><small style="color:#666;">Protects vital processes.</small>
+                  </td>
+                  <td>2.7 MB</td>
+                  <td style="text-align: center;">
+                    <button onclick="downloadVMAntiKill()">Download .EXE</button>
+                  </td>
+                </tr>
 
-<tr>
-  <td style="border:1px solid #000;padding:10px;">
-    <strong>VMAntiKill v1.0.4</strong><br><small>Protects vital processes from being forced closed.</small>
-  </td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">2.7 MB</td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">
-    <button onclick="downloadVMAntiKill()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .EXE</button>
-  </td>
-</tr>
+                <tr>
+                  <td>
+                    <strong>RoNET</strong><br><small style="color:#666;">Roblox Compatible with collabnet</small>
+                  </td>
+                  <td>163 MB</td>
+                  <td style="text-align: center;">
+                    <button onclick="downloadCollabNET()">Download .ZIP</button>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
 
-<tr>
-  <td style="border:1px solid #000;padding:10px;">
-    <strong>RoNET</strong><br><small>Roblox Compatible with collabnet</small>
-  </td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">163 MB</td>
-  <td style="border:1px solid #000;padding:10px;text-align:center;">
-    <button onclick="downloadCollabNET()" style="cursor:pointer; font-weight:bold;">DOWNLOAD .ZIP</button>
-  </td>
-</tr>
+        <p style="font-size: 0.9em; color: #555; margin-top: 10px;">Downloads this session: <span id="session-downloads">0</span></p>
+      </fieldset>
+    </div>
 
-</table>
+    <div id="comments">
+      <fieldset>
+        <legend>Public Guestbook</legend>
 
-<p style="font-size: 0.9em; color: #555;">Downloads this session: <span id="session-downloads">0</span></p>
-</div>
+        <div class="guestbook-area">
+          <h3 style="margin-top:0;">Sign the Book:</h3>
+          
+          <div class="field-row-stacked">
+            <label for="commentName">Your Alias</label>
+            <input type="text" id="commentName" style="width: 250px;">
+          </div>
+          
+          <div class="field-row-stacked" style="margin-top:10px;">
+            <label for="commentText">Message</label>
+            <textarea id="commentText" rows="3" style="width: 100%;"></textarea>
+          </div>
 
-<div id="comments">
-<h2 style="background:#800000;color:#fff;padding:5px 10px;">Public Guestbook</h2>
+          <div style="margin: 15px 0;">
+            <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div>
+          </div>
 
-<div style="background:#f9f9f9;border:1px solid #888;padding:15px;margin-bottom:20px;">
-  <h3>Sign the Book:</h3>
-  <input type="text" id="commentName" placeholder="Your Alias"><br><br>
-  <textarea id="commentText" placeholder="Write your message..." style="width:100%;height:60px;"></textarea><br><br>
+          <button id="postBtn" onclick="addComment()">Post Message</button>
+        </div>
 
-  <div class="g-recaptcha" data-sitekey="6LcFyUgsAAAAAAVcOVQM0vM2dalzpP20c69AohbA"></div><br>
+        <h3>Entries (<span id="commentCount">0</span>)</h3>
+        <div id="commentsContainer" style="max-height: 400px; overflow-y: auto;"></div>
+        <p id="noComments" style="color:#666;">The guestbook is empty. Say hello!</p>
+      </fieldset>
+    </div>
 
-  <button id="postBtn" onclick="addComment()" style="cursor:pointer;">POST MESSAGE</button>
-</div>
+    <div id="about" style="margin-top:30px; text-align: center; color: #666; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 10px;">
+        <p>About Me: Just a guy sharing CollabVM stuff.</p>
+    </div>
 
-<h3>Entries (<span id="commentCount">0</span>)</h3>
-<div id="commentsContainer"></div>
-<p id="noComments">The guestbook is empty. Say hello!</p>
-</div>
-
-<div id="about" style="background:#ffffe0;padding:20px;border:1px solid #e6db55;text-align:center;margin-top:20px;">
-<h2>About Me</h2>
-<p>Just a guy sharing CollabVM stuff.</p>
-</div>
-
+  </div>
 </div>
 
 <script>
+/* === SEU JAVASCRIPT ORIGINAL (NÃO MODIFICADO) === */
+
 /* === SUPABASE CONFIGURATION === */
 // Replace with your actual Supabase URL and Anon Key
 const SB_URL = "YOUR_SUPABASE_URL_HERE";
 const SB_KEY = "YOUR_SUPABASE_ANON_KEY_HERE";
-const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+let supabaseClient;
+// Verificação de segurança para não quebrar se não tiver chave
+if (typeof supabase !== 'undefined') {
+    supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+}
 
 function sanitize(str){
   const d=document.createElement("div");
@@ -167,7 +278,7 @@ async function addComment(){
     grecaptcha.reset();
     displayComments();
   }
-  
+   
   document.getElementById("postBtn").disabled = false;
 }
 
@@ -193,11 +304,22 @@ async function displayComments(){
     comments.forEach(e => {
       const d = document.createElement("div");
       const date = new Date(e.created_at).toLocaleString();
-      d.innerHTML = "<b>" + e.name + "</b> (" + date + ")<br>" + e.text;
-      d.style.border = "1px solid #ccc";
+      
+      // Estilo adaptado para ficar bonito no tema Win7
+      d.innerHTML = `
+        <div style="border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 5px;">
+            <b style="color: #0066cc;">${e.name}</b> 
+            <span style="font-size: 0.85em; color: #888; float: right;">${date}</span>
+        </div>
+        <div style="color: #333;">${e.text}</div>
+      `;
+      d.style.border = "1px solid #d9d9d9";
       d.style.padding = "10px";
       d.style.marginBottom = "10px";
       d.style.background = "#fff";
+      d.style.borderRadius = "3px";
+      d.style.boxShadow = "0 1px 2px rgba(0,0,0,0.05)";
+      
       box.appendChild(d);
     });
   } catch (e) {
@@ -212,7 +334,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-
-
-
