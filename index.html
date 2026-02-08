@@ -4,56 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Domain Moved</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 40px;
-    }
-
-    button {
-      padding: 15px 40px;
-      font-size: 1.2em;
-      background-color: #0f62fe;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background-color: #0353e9;
-    }
-  </style>
+  <!-- Link pro framework 7.css -->
+  <link rel="stylesheet" href="https://unpkg.com/7.css@latest/7.css">
 </head>
 <body>
 
-  <h1 id="message">We moved our domain!</h1>
+  <h1>We moved our domain!</h1>
   <button id="goButton">Go</button>
 
   <script>
-    // Faz o h1 ser falado assim que a página carrega
+    // Fala a frase ao carregar
     window.addEventListener('load', () => {
       const msg = new SpeechSynthesisUtterance("We moved our domain!");
       window.speechSynthesis.speak(msg);
     });
 
-    // Botão "Go" (sem ação por enquanto)
-    const button = document.getElementById('goButton');
-    button.addEventListener('click', () => {
-      alert("You clicked Go! 🚀"); // você pode mudar pra abrir outro link
+    // Redireciona ao clicar
+    document.getElementById('goButton').addEventListener('click', () => {
+      window.location.href = "https://nothingsite.neocities.org/";
     });
   </script>
 
